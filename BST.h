@@ -16,13 +16,12 @@ typedef struct {
 // prototypes
 
 void insertNode_R(TreeNodePtr *t, int value) {
-  if (t == NULL) {
+  if (*t == NULL) {
     *t = (TreeNodePtr)malloc(sizeof(struct TreeNode));
-    if (*t) {
-      (*t)->leftPtr = NULL;
-      (*t)->rightPtr = NULL;
-      (*t)->data = value;
-    }
+    (*t)->leftPtr = NULL;
+    (*t)->rightPtr = NULL;
+    (*t)->data = value;
+
   } else {
     if ((*t)->data >= value)
       insertNode_R(&((*t)->leftPtr), value);
@@ -93,13 +92,13 @@ void postOrder(TreeNodePtr treePtr) {
 } // end
 
 void printTree(TreeNodePtr treePtr, int space) {
-  printf("%d", space);
-  // if(treePtr!=NULL){
-  //   printTree(treePtr->rightPtr,space+5);
-  //   for(int i=0;i<space;i++){
-  //     printf("   ");
-  //     printf("%3d\n",treePtr->data);
-  //     printTree(treePtr->leftPtr,space+5);
-  //     }
-  //   }
+  if(treePtr!=NULL){
+    printTree(treePtr->rightPtr,space+5);
+    for(int i=0;i<space;i++)
+    {
+      printf("   ");
+    }
+    printf("%3d\n",treePtr->data);
+    printTree(treePtr->leftPtr,space+5);
+  }
 }
